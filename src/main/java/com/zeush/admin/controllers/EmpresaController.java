@@ -9,24 +9,24 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.zeush.admin.entities.Profissional;
-import com.zeush.admin.services.ProfissionalService;
+import com.zeush.admin.entities.Empresa;
+import com.zeush.admin.services.EmpresaService;
 
 @RestController
-@RequestMapping(value = "/profissionais")
-public class ProfissionalController {
+@RequestMapping(value = "/empresas")
+public class EmpresaController {
 
 	@Autowired
-	private ProfissionalService service; 
+	private EmpresaService service; 
 	
 	@GetMapping
-	public ResponseEntity<List<Profissional>> buscarTodos() {
-		List<Profissional> list = service.buscarTodos();
+	public ResponseEntity<List<Empresa>> buscarTodos() {
+		List<Empresa> list = service.buscarTodos();
 		return ResponseEntity.ok().body(list); 
 	}
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Profissional> buscarPorId(@PathVariable Long id) {
-		Profissional obj = service.buscarPorId(id);
+	public ResponseEntity<Empresa> buscarPorId(@PathVariable Long id) {
+		Empresa obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj); 
 	}
 }
