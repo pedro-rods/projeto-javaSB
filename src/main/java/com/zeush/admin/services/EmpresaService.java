@@ -24,5 +24,7 @@ public class EmpresaService {
 		return obj.get(); 
 	}
 	
-	
+	public Empresa cadastrar (Empresa obj) {
+		return repository.save(obj);
+	}
 }

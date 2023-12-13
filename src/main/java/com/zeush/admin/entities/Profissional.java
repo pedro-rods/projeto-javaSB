@@ -1,8 +1,8 @@
 package com.zeush.admin.entities;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,7 +32,7 @@ public class Profissional implements Serializable {
 	private Boolean laudo;
 	
 	@Getter	@ManyToMany(mappedBy = "profissionais")
-	private Set<Empresa> empresas = new HashSet<>();
+	private List<Empresa> empresas = new ArrayList<>();
 	
 	public Profissional(Long id_profissional, String nome, String email, String senha, String telefone,
 			String especialidade, String tipo_credencial, String credencial, String imagemAssinatura, String perfil,

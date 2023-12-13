@@ -29,6 +29,6 @@ public class Paciente implements Serializable {
 	@Getter	@Setter
 	private String nome, email, sexo, telefone, dataNasc;
 
-	@Getter	@Setter	@ManyToOne	@JoinColumn(name = "empresa")
+	@Getter	@Setter	@ManyToOne @JoinColumn(name = "empresa")
 	private Empresa empresa;
 }

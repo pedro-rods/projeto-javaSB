@@ -24,5 +24,7 @@ public class ProfissionalService {
 		return obj.get(); 
 	}
 	
-	
+	public Profissional cadastrar (Profissional obj) {
+		return repository.save(obj);
+	}
 }

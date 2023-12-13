@@ -2,9 +2,7 @@ package com.zeush.admin.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -40,7 +38,7 @@ public class Empresa implements Serializable {
 
 	@Getter	@ManyToMany @JsonIgnore
 	@JoinTable(name = "tb_empresa_profissional", joinColumns = @JoinColumn(name = "id_empresa"), inverseJoinColumns = @JoinColumn(name = "id_profissional"))
-	private Set<Profissional> profissionais = new HashSet<>();
+	private List<Profissional> profissionais = new ArrayList<>();
 
 	public Empresa(Long id_empresa, String cpfCNPJ, String razao_social, String nome_fantasia) {
 		super();

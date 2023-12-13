@@ -24,5 +24,9 @@ public class PacienteService {
 		return obj.get(); 
 	}
 	
+	public Paciente cadastrar (Paciente obj) {
+		return repository.save(obj);
+	}
+	
 	
 }
