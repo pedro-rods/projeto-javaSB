@@ -24,9 +24,29 @@ public class PacienteService {
 		return obj.get(); 
 	}
 	
-	public Paciente cadastrar (Paciente obj) {
+	public Paciente cadastrarUsuario (Paciente obj) {
 		return repository.save(obj);
 	}
 	
+	public void deletarPaciente(Long id) {
+		repository.deleteById(id);
+	}
+	
+	public Paciente alterarUsuario(Long id, Paciente obj) {
+		Paciente entity = repository.getReferenceById(id);
+		alterarData(entity, obj); 
+		return repository.save(entity); 
+	}
+
+	private void alterarData(Paciente entity, Paciente obj) {
+		entity.setNome(obj.getNome());
+		entity.setEmail(obj.getEmail());
+		entity.setSexo(obj.getSexo());
+		entity.setTelefone(obj.getTelefone());
+		entity.setDataNasc(obj.getDataNasc());
+		entity.setEmpresa(obj.getEmpresa());
+		
+		repository.save(entity); 		
+	}
 	
 }

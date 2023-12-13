@@ -27,4 +27,29 @@ public class ProfissionalService {
 	public Profissional cadastrar (Profissional obj) {
 		return repository.save(obj);
 	}
+	public void deletarProfissional(Long id) {
+		repository.deleteById(id);
+	}
+	
+	public Profissional alterarUsuario(Long id, Profissional obj) {
+		Profissional entity = repository.getReferenceById(id);
+		alterarData(entity, obj); 
+		return repository.save(entity); 
+	}
+
+	private void alterarData(Profissional entity, Profissional obj) {
+		entity.setNome(obj.getNome());
+		entity.setEmail(obj.getEmail());
+		entity.setSenha(obj.getSenha());
+		entity.setTelefone(obj.getTelefone());
+		entity.setEspecialidade(obj.getCredencial());
+		entity.setTipo_credencial(obj.getTipo_credencial());
+		entity.setCredencial(obj.getCredencial());
+		entity.setImagemAssinatura(obj.getImagemAssinatura());
+		entity.setPerfil(obj.getPerfil());
+		entity.setLaudo(obj.getLaudo());
+	
+		repository.save(entity); 
+		
+	}
 }

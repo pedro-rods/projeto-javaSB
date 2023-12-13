@@ -35,6 +35,7 @@ public class TestConfig implements CommandLineRunner {
 		 *  */
 		Empresa e1 = new Empresa(null, "21111111111111", "Empresa11", "TstEmpresa11"); 
 		Empresa e2 = new Empresa(null, "12222222222", "Empresa22", "TstEmpresa22"); 
+		Empresa e3 = new Empresa(null, "12222222222", "Empresa33", "TstEmpresa33"); 
 		
 		Paciente p1 = new Paciente(null, "Tst1", "tst1@mail.com", "Masculino", "98078675", "10052003", e1);
 		Paciente p2 = new Paciente(null, "Tst2", "tst2@mail.com", "Feminino", "333333333", "07072023", e2);
@@ -42,7 +43,7 @@ public class TestConfig implements CommandLineRunner {
 		Profissional pr1 = new Profissional(null, "Teste1", "teste1@mail.com", "123456", "11111111111", "cardiologista", "crm", "123456", "caminho do arquivo", "profissional", true);
 		Profissional pr2 = new Profissional(null, "Teste2", "teste2@mail.com", "123456", "222222222", "fisioterapeuta", "crm", "123456", "caminho do arquivo", "profissional", true);
 		
-		empresaRepository.saveAll(Arrays.asList(e1, e2));
+		empresaRepository.saveAll(Arrays.asList(e1, e2, e3));
 		pacienteRepository.saveAll(Arrays.asList(p1,p2));  
 		profissionalRepository.saveAll(Arrays.asList(pr1,pr2));
 		
