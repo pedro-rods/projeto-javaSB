@@ -30,8 +30,9 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		
-
+		/*
+		 * Instanciando as entidades Empresa, Paciente e Profissional
+		 *  */
 		Empresa e1 = new Empresa(null, "21111111111111", "Empresa11", "TstEmpresa11"); 
 		Empresa e2 = new Empresa(null, "12222222222", "Empresa22", "TstEmpresa22"); 
 		
@@ -43,6 +44,11 @@ public class TestConfig implements CommandLineRunner {
 		empresaRepository.saveAll(Arrays.asList(e1, e2));
 		pacienteRepository.saveAll(Arrays.asList(p1,p2));  
 		profissionalRepository.save(pr1); 
+		
+		// Vinculando um profissional às empresa
+		e1.getProfissionais().add(pr1); 
+		e2.getProfissionais().add(pr1); 
+		empresaRepository.saveAll(Arrays.asList(e1,e2)); 
 	}
 	
 	

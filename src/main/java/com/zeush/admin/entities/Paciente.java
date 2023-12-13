@@ -2,8 +2,6 @@ package com.zeush.admin.entities;
 
 import java.io.Serializable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,19 +23,12 @@ import lombok.Setter;
 public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@Getter
-	@Setter
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Getter	@Setter	@Id	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id_paciente;
 
-	@Getter
-	@Setter
+	@Getter	@Setter
 	private String nome, email, sexo, telefone, dataNasc;
 
-	@Getter
-	@Setter
-	@ManyToOne
-	@JoinColumn(name = "empresa")
+	@Getter	@Setter	@ManyToOne	@JoinColumn(name = "empresa")
 	private Empresa empresa;
 }
