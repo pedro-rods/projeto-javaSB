@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.zeush.admin.entities.Empresa;
 import com.zeush.admin.repositories.EmpresaRepository;
+import com.zeush.admin.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class EmpresaService {
@@ -21,7 +22,7 @@ public class EmpresaService {
 	
 	public Empresa buscarPorId(Long id) {
 		Optional<Empresa> obj = repository.findById(id);
-		return obj.get(); 
+		return obj.orElseThrow(()-> new ResourceNotFoundException(id)); 
 	}
 	
 	public Empresa cadastrarEmpresa (Empresa obj) {

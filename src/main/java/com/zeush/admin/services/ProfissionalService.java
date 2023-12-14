@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.zeush.admin.entities.Profissional;
 import com.zeush.admin.repositories.ProfissionalRepository;
+import com.zeush.admin.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProfissionalService {
@@ -21,7 +22,7 @@ public class ProfissionalService {
 	
 	public Profissional buscarPorId(Long id) {
 		Optional<Profissional> obj = repository.findById(id);
-		return obj.get(); 
+		return obj.orElseThrow(()-> new ResourceNotFoundException(id)); 
 	}
 	
 	public Profissional cadastrar (Profissional obj) {

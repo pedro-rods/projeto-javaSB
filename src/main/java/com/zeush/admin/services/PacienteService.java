@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.zeush.admin.entities.Paciente;
 import com.zeush.admin.repositories.PacienteRepository;
+import com.zeush.admin.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class PacienteService {
@@ -21,7 +22,7 @@ public class PacienteService {
 	
 	public Paciente buscarPorId(Long id) {
 		Optional<Paciente> obj = repository.findById(id);
-		return obj.get(); 
+		return obj.orElseThrow(()-> new ResourceNotFoundException(id)); 
 	}
 	
 	public Paciente cadastrarUsuario (Paciente obj) {
