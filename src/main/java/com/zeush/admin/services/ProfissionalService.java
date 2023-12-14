@@ -32,7 +32,7 @@ public class ProfissionalService {
 		return repository.save(obj);
 	}
 
-	public void deletarEmpresa(Long id) {
+	public void deletarProfissional(Long id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {

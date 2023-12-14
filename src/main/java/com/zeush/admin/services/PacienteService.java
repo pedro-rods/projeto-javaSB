@@ -32,7 +32,7 @@ public class PacienteService {
 		return repository.save(obj);
 	}
 
-	public void deletarEmpresa(Long id) {
+	public void deletarPaciente(Long id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
