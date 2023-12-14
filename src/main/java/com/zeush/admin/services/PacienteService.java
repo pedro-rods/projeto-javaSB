@@ -13,6 +13,8 @@ import com.zeush.admin.repositories.PacienteRepository;
 import com.zeush.admin.services.exceptions.DatabaseException;
 import com.zeush.admin.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class PacienteService {
 
@@ -43,9 +45,13 @@ public class PacienteService {
 	}
 
 	public Paciente alterarUsuario(Long id, Paciente obj) {
-		Paciente entity = repository.getReferenceById(id);
-		alterarData(entity, obj);
-		return repository.save(entity);
+		try {
+			Paciente entity = repository.getReferenceById(id);
+			alterarData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id); 
+		}
 	}
 
 	private void alterarData(Paciente entity, Paciente obj) {

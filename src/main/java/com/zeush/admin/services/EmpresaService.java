@@ -13,6 +13,8 @@ import com.zeush.admin.repositories.EmpresaRepository;
 import com.zeush.admin.services.exceptions.DatabaseException;
 import com.zeush.admin.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class EmpresaService {
 
@@ -42,9 +44,13 @@ public class EmpresaService {
 	}
 	
 	public Empresa alterarEmpresa(Long id, Empresa obj) {
-		Empresa entity = repository.getReferenceById(id);
-		alterarData(entity, obj); 
-		return repository.save(entity); 
+		try {
+			Empresa entity = repository.getReferenceById(id);
+			alterarData(entity, obj); 
+			return repository.save(entity); 
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id); 
+		}
 	}
 
 	private void alterarData(Empresa entity, Empresa obj) {

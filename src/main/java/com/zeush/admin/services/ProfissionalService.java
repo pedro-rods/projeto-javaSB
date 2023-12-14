@@ -13,6 +13,8 @@ import com.zeush.admin.repositories.ProfissionalRepository;
 import com.zeush.admin.services.exceptions.DatabaseException;
 import com.zeush.admin.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class ProfissionalService {
 
@@ -43,9 +45,13 @@ public class ProfissionalService {
 	}
 
 	public Profissional alterarUsuario(Long id, Profissional obj) {
-		Profissional entity = repository.getReferenceById(id);
-		alterarData(entity, obj);
-		return repository.save(entity);
+		try {
+			Profissional entity = repository.getReferenceById(id);
+			alterarData(entity, obj);
+			return repository.save(entity);
+		} catch (EntityNotFoundException e) {
+			throw new ResourceNotFoundException(id);
+		}
 	}
 
 	private void alterarData(Profissional entity, Profissional obj) {
