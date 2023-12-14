@@ -19,37 +19,38 @@ import jakarta.persistence.EntityNotFoundException;
 public class EmpresaService {
 
 	@Autowired
-	private EmpresaRepository repository; 
-	
+	private EmpresaRepository repository;
+
 	public List<Empresa> buscarTodos() {
-		return repository.findAll(); 
+		return repository.findAll();
 	}
-	
+
 	public Empresa buscarPorId(Long id) {
 		Optional<Empresa> obj = repository.findById(id);
-		return obj.orElseThrow(()-> new ResourceNotFoundException(id)); 
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
-	
-	public Empresa cadastrarEmpresa (Empresa obj) {
+
+	public Empresa cadastrarEmpresa(Empresa obj) {
 		return repository.save(obj);
 	}
+
 	public void deletarEmpresa(Long id) {
 		try {
 			repository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
 			throw new ResourceNotFoundException(id);
 		} catch (DataIntegrityViolationException e) {
-			throw new DatabaseException(e.getMessage()); 
+			throw new DatabaseException(e.getMessage());
 		}
 	}
-	
+
 	public Empresa alterarEmpresa(Long id, Empresa obj) {
 		try {
 			Empresa entity = repository.getReferenceById(id);
-			alterarData(entity, obj); 
-			return repository.save(entity); 
+			alterarData(entity, obj);
+			return repository.save(entity);
 		} catch (EntityNotFoundException e) {
-			throw new ResourceNotFoundException(id); 
+			throw new ResourceNotFoundException(id);
 		}
 	}
 
@@ -57,7 +58,19 @@ public class EmpresaService {
 		entity.setCpfCNPJ(obj.getCpfCNPJ());
 		entity.setNome_fantasia(obj.getNome_fantasia());
 		entity.setRazao_social(obj.getRazao_social());
-		
-		repository.save(entity); 		
+		entity.setCep(obj.getCep());
+		entity.setCidade(obj.getCidade());
+		entity.setEndereco(obj.getEndereco());
+		entity.setQuantidade(obj.getQuantidade());
+		entity.setPais(obj.getPais());
+		entity.setTipoCadastro(obj.getTipoCadastro());
+		entity.setTipoEmpresa(obj.getTipoEmpresa());
+		if (obj.getEmpresaPai() == null) {
+			entity.setEmpresaPai(obj);
+		} else {
+			entity.setEmpresaPai(obj.getEmpresaPai());
+		}
+
+		repository.save(entity);
 	}
 }
