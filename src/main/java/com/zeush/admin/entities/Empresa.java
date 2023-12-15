@@ -39,7 +39,7 @@ public class Empresa implements Serializable {
 	@Getter	@OneToMany(mappedBy = "empresa") @JsonIgnore
 	private List<Paciente> pacientes = new ArrayList<>();
 	
-	@Getter @Setter @JsonIgnore
+	@Getter @Setter
 	private Empresa empresaPai; 
 
 	@Getter	@ManyToMany @JsonIgnore

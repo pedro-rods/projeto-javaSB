@@ -65,11 +65,7 @@ public class EmpresaService {
 		entity.setPais(obj.getPais());
 		entity.setTipoCadastro(obj.getTipoCadastro());
 		entity.setTipoEmpresa(obj.getTipoEmpresa());
-		if (obj.getEmpresaPai() == null) {
-			entity.setEmpresaPai(obj);
-		} else {
-			entity.setEmpresaPai(obj.getEmpresaPai());
-		}
+		entity.setEmpresaPai(obj.getEmpresaPai());
 
 		repository.save(entity);
 	}
