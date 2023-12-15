@@ -25,32 +25,32 @@ public class PacienteController {
 	@Autowired
 	private PacienteService service; 
 	
-	@GetMapping
+	@GetMapping(value = "/buscar")
 	public ResponseEntity<List<Paciente>> buscarTodos() {
 		List<Paciente> list = service.buscarTodos();
 		return ResponseEntity.ok().body(list); 
 	}
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "buscar/{id}")
 	public ResponseEntity<Paciente> buscarPorId(@PathVariable Long id) {
 		Paciente obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj); 
 	}
 	
-	@PostMapping
+	@PostMapping(value = "cadastrar")
 	public ResponseEntity<Paciente> cadastrar(@RequestBody Paciente obj) {
 		obj = service.cadastrarUsuario(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_paciente()).toUri();
 		return ResponseEntity.created(uri).body(obj); 		
 	}
 	
-	@DeleteMapping(value="/{id}")
+	@DeleteMapping(value="deletar/{id}")
 	public ResponseEntity<Void> deletarPaciente (@PathVariable Long id) {
 		service.deletarPaciente(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "alterar/{id}")
 	public ResponseEntity<Paciente> alterarUsuario (@PathVariable Long id, @RequestBody Paciente obj) {
 		obj = service.alterarUsuario(id, obj);
 		return ResponseEntity.ok().body(obj); 

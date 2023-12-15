@@ -25,29 +25,29 @@ public class ProfissionalController {
 	@Autowired
 	private ProfissionalService service; 
 	
-	@GetMapping
+	@GetMapping(value = "/buscar")
 	public ResponseEntity<List<Profissional>> buscarTodos() {
 		List<Profissional> list = service.buscarTodos();
 		return ResponseEntity.ok().body(list); 
 	}
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "buscar/{id}")
 	public ResponseEntity<Profissional> buscarPorId(@PathVariable Long id) {
 		Profissional obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj); 
 	}
-	@PostMapping
+	@PostMapping(value = "cadastrar")
 	public ResponseEntity<Profissional> cadastrar(@RequestBody Profissional obj) {
 		obj = service.cadastrar(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_profissional()).toUri();
 		return ResponseEntity.created(uri).body(obj); 		
 	}
-	@DeleteMapping(value="/{id}")
+	@DeleteMapping(value="deletar/{id}")
 	public ResponseEntity<Void> deletarProfissional (@PathVariable Long id) {
 		service.deletarProfissional(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "alterar/{id}")
 	public ResponseEntity<Profissional> alterarUsuario (@PathVariable Long id, @RequestBody Profissional obj) {
 		obj = service.alterarUsuario(id, obj);
 		return ResponseEntity.ok().body(obj); 

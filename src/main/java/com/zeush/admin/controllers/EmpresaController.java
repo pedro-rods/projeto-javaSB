@@ -25,29 +25,29 @@ public class EmpresaController {
 	@Autowired
 	private EmpresaService service; 
 	
-	@GetMapping
+	@GetMapping(value = "/buscar")
 	public ResponseEntity<List<Empresa>> buscarTodos() {
 		List<Empresa> list = service.buscarTodos();
 		return ResponseEntity.ok().body(list); 
 	}
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/buscar/{id}")
 	public ResponseEntity<Empresa> buscarPorId(@PathVariable Long id) {
 		Empresa obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj); 
 	}
-	@PostMapping
+	@PostMapping(value = "/cadastrar")
 	public ResponseEntity<Empresa> cadastrarEmpresa(@RequestBody Empresa obj) {
 		obj = service.cadastrarEmpresa(obj); 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId_empresa()).toUri();
 		return ResponseEntity.created(uri).body(obj); 		
 	}
-	@DeleteMapping(value="/{id}")
+	@DeleteMapping(value="deletar/{id}")
 	public ResponseEntity<Void> deletarEmpresa (@PathVariable Long id) {
 		service.deletarEmpresa(id);
 		return ResponseEntity.noContent().build();
 	}
 	
-	@PutMapping(value = "/{id}")
+	@PutMapping(value = "alterar/{id}")
 	public ResponseEntity<Empresa> alterarEmpresa (@PathVariable Long id, @RequestBody Empresa obj) {
 		obj = service.alterarEmpresa(id, obj);
 		return ResponseEntity.ok().body(obj); 
